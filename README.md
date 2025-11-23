@@ -79,8 +79,52 @@ Pré-requisitos:
 - Maven 3.8+
 - (Opcional) Docker, se quiser rodar via container
 
-### 1. Clonar o repositório
+2. Rodar em modo dev (Quarkus)
+mvn quarkus:dev
+
+A API ficará acessível em:
+```
+http://localhost:8080
+```
+
+Swagger:
+```
+http://localhost:8080/q/swagger-ui
+```
+
+O banco H2 roda em memória e é configurado no application.properties.
+
+🐋 Rodando via Docker (local)
+
+Dentro da pasta `safework-quarkus`:
+
+### Build da imagem
 
 ```bash
-git clone https://github.com/EnzoMMaciel10/safework-quarkus-api.git
-cd safework-quarkus-api/safework-quarkus
+docker build -t safework-quarkus-api .
+```
+
+Subir o container
+```
+docker run -p 8080:8080 safework-quarkus-api
+```
+
+🌍 Deploy na Render
+
+`O deploy é realizado na plataforma Render utilizando um Dockerfile multi-stage presente na raiz do módulo safework-quarkus.`
+
+Configuração principal do serviço:
+
+```Runtime: Docker
+
+Root Directory: safework-quarkus
+
+Porta: 8080 (detectada automaticamente pelo Render)
+
+Deploy automático a cada git push na branch main.
+
+URL pública da API:
+https://safework-quarkus-api.onrender.com
+
+
+```
